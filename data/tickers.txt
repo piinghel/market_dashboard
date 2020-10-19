@@ -1,0 +1,69 @@
+ticker	name	group
+KRE	SPDR S&P Regional Banking ETF	Cyclical
+GAMR	Wedbush ETFMG Video Game Tech    	Growth
+XLU	Utilities Slect Sector SPDR F   	Defensive
+FLYT	Direxion Flight to Safety Stra  	Defensive
+KIE	SPDR S&P Insurance ETF	Cyclical
+MUB	Ishares National Muni Bond ETF 	Defensive
+RWR	SPDR Dow Jones REIT ETF	Defensive
+JETS	US Global Jets ETF	Cyclical
+XLF	Financial Select Sector SPDR F 	Cyclical
+PICK	iShares MSCI Global Metal & M	Cyclical
+XLP	Consumer Staples	Defensive
+IYR	Real Estate	Defensive
+XLRE	Real Estate	Defensive
+XME	Metals & Mining	Cyclical
+IYT	Transports	Cyclical
+IPO	IPO index	Growth
+XLI	Industrials	Cyclical
+DBP	Precious Metals	Defensive
+HERO	Video Games & Esports	Growth
+ITA	Aerospace & Defense	Cyclical
+ARKQ	Autonomous Tech & Robotics	Growth
+XLV	Healthcare	Defensive
+ROBO	Global Robotics and Automation	Growth
+CHIQ	China Consumer	Growth
+XLY	Consumer Discretionary	Cyclical
+SPY	S&P 500	Other
+SMH	Semiconductors	Growth
+GDX	Gold Miners	Cyclical
+EEM	Emerging Markets	Cyclical
+XLC	Communication Services	Growth
+MORT	Mortgage Reit	Defensive
+PPH	Pharmaceuticals	Defensive
+OIH	Oil Services	Cyclical
+UNG	Natural Gas Fund	Cyclical
+XRT	Retail	Cyclical
+XBI	Biotech	Defensive
+SRVR	Data & Infrastructure	Growth
+CQQQ	China Technology	Growth
+PPLT	Platinum	Other
+SOCL	Social Media	Growth
+FIVG	5G nexgen	Growth
+XHB	Homebuilders	Cyclical
+FFTY	Innovator IBD 50	Growth
+XLK	Technology	Growth
+BETZ	Sports Betting & iGaming	Growth
+PSJ	Dynamic Software	Growth
+ITB	US Home Construction	Cyclical
+XTL	Telecom	Defensive
+IPAY	ETFMG Prime Mobile Payments ET	Growth
+AMLP	Alerian MLP ETF	Cyclical
+CLOU	Global X Cloud Computing ETF	Growth
+PSCT	Invesco S&P SmallCap Informati	Growth
+HACK	ETFMG Prime Cyber Security ETF	Growth
+EBIZ	Global X E-Commerce ETF	Growth
+IDNA	iShares Genomics Immunology an	Growth
+BBC	Virtus LifeSci Biotech Clinica	Growth
+ARKW	ARK Next Generation Internet E 	Growth
+FRAK	VanEck Vectors Unconventional  	Cyclical
+ONLN	Proshares Online Retail ETF	Growth
+BLCN	Reality Shares Nasdaq NexGen E	Growth
+XOP	SPDR S&P Oil & Gas Exploration	Cyclical
+WCLD	WisdomTree Cloud Computing Fun	Growth
+USO	United States Oil Fund LP	Cyclical
+SPLV	Low Vol	Defensive
+SPHB	High Beta	Cyclical
+XLE	Energy	Cyclical
+VLUE	Value	Cyclical
+MTUM	Momentum	Growth
