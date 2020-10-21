@@ -5,7 +5,6 @@ import numpy as np
 from functions.get_data import get_data
 from functions.get_data import compute_returns
 import plotly.express as px
-from functions import SessionState
 
 DIR_TICKERS = 'data/tickers.txt'
 MAX_PERIOD = 5*365
@@ -99,7 +98,7 @@ expander_figureOpt = st.sidebar.beta_expander("Figure options")
 
 # figure options
 with expander_figureOpt:
-    ascending = expander_figureOpt.checkbox("Ascending", value=False)
+    ascending = expander_figureOpt.checkbox("Descending", value=False)
     fig_width = expander_figureOpt.slider("Figure width", min_value=100, max_value=2000, value=1000, step=1)
     fig_height = expander_figureOpt.slider("Figure height", min_value=100, max_value=2000, value=1000, step=1)
     font_size = expander_figureOpt.number_input("Font size", min_value=4, max_value=30, value=10, step=1)
@@ -110,7 +109,7 @@ else:
     asc_desc = "total descending"
 
 # compute returns
-data = get_data(tickers=tickers_input, period="2y")
+data = get_data(tickers=tickers_input, period="10y")
 
 rets = [compute_returns(data=data, column=comput, period=p, benchmark=benchmark) for p in periods]
 rets_conc = round(pd.concat(rets, axis=1)*100, ndigits=2)
@@ -126,6 +125,7 @@ with expander_ticker:
 select_tick = rets_conc[rets_conc['Ticker'].isin(t)]
 select_tick = pd.concat([select_tick.set_index('Ticker'), tickers.set_index('Ticker')], axis=1, join='inner').reset_index()
 select_tick = select_tick.sort_values(['Group',sorts], ascending=ascending)
+select_tick.dropna(inplace=True)
 df_plot_long = pd.melt(select_tick, id_vars=['Ticker','Name', 'Group'], var_name='Period', value_name='Return (%)')
 
 # make figure
