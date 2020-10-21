@@ -1,4 +1,4 @@
-ticker	name	group
+Ticker	Name	Group
 KRE	SPDR S&P Regional Banking ETF	Cyclical
 GAMR	Wedbush ETFMG Video Game Tech    	Growth
 XLU	Utilities Slect Sector SPDR F   	Defensive

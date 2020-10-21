@@ -1,5 +1,7 @@
 import yfinance as yf
 import streamlit as st
+from streamlit.report_thread import get_report_ctx
+
 
 @st.cache
 def get_data(tickers=None, 
@@ -48,7 +50,22 @@ def get_data(tickers=None,
     return data
 
 
-def compute_returns(data, column="Close", period=1):
-    ret = data[column].iloc[-1]/data[column].iloc[-(period+1)]-1
+def compute_returns(data, column="Close", period=1, benchmark=1):
+
+    
+    data = data[column]
+    # check if benchmark is not 1
+    if  benchmark !=1:   
+        data = data.div(data[benchmark], axis=0)
+    
+    # compute return
+    ret = data.iloc[-1]/data.iloc[-(period+1)] - 1    
     ret.columns = period
+
     return ret
+
+
+
+
+
+
