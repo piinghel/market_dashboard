@@ -2,9 +2,11 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import numpy as np
+import plotly.express as px
+
 from functions.get_data import get_data
 from functions.get_data import compute_returns
-import plotly.express as px
+
 
 DIR_TICKERS = 'data/tickers.txt'
 MAX_PERIOD = 5*365
@@ -134,7 +136,7 @@ with st.spinner("Updating figure..."):
                       font_size=font_size, sorting = sorts, periods=periods,
                       asc_desc=asc_desc, within_group=within_group)
     st.plotly_chart(fig, use_container_width=False)
-
+    
 
 
 

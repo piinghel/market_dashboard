@@ -1,6 +1,6 @@
 import yfinance as yf
 import streamlit as st
-from streamlit.report_thread import get_report_ctx
+
 
 
 @st.cache
