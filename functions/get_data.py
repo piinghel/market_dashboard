@@ -3,7 +3,7 @@ import streamlit as st
 
 
 
-@st.cache
+@st.cache(show_spinner=False)
 def get_data(tickers=None, 
              period="1y", 
              interval="1d",
@@ -59,7 +59,8 @@ def compute_returns(data, column="Close", period=1, benchmark=1):
         data = data.div(data[benchmark], axis=0)
     
     # compute return
-    ret = data.iloc[-1]/data.iloc[-(period+1)] - 1    
+    ret = data.iloc[-1]/data.iloc[-(period+1)] - 1 
+    ret.fillna(method='ffill', inplace=True)   
     ret.columns = period
 
     return ret
