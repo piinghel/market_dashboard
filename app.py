@@ -16,5 +16,6 @@ def main():
         run_page2()
         
 if __name__ == "__main__":
-    st.set_page_config(layout="wide")
+    st.beta_set_page_config(layout="wide")
     main()
+ 
