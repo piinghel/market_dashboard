@@ -1,7 +1,23 @@
-from functions.get_data import get_data
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from numpy.lib.stride_tricks import as_strided
+from numpy.lib import pad
+import numpy as np
+
+from functions.get_data import get_data
+
+def rolling_spearman(seqa, seqb, window):
+    stridea = seqa.strides[0]
+    ssa = as_strided(seqa, shape=[len(seqa) - window + 1, window], strides=[stridea, stridea])
+    strideb = seqa.strides[0]
+    ssb = as_strided(seqb, shape=[len(seqb) - window + 1, window], strides =[strideb, strideb])
+    ar = pd.DataFrame(ssa)
+    br = pd.DataFrame(ssb)
+    ar = ar.rank(1)
+    br = br.rank(1)
+    corrs = ar.corrwith(br, 1)
+    return pad(corrs, (window - 1, 0), 'constant', constant_values=np.nan)
 
 def run_page2():
     
@@ -38,9 +54,10 @@ def run_page2():
     for c in df_perc.columns:
         if c !=ticker:
                 df_perc_period = df_perc.tail(period_figure)
-                corr_tick_rolling[c] = df_perc_period[ticker].rolling(corr_period).corr(df_perc_period[c]).dropna()
+                #corr_tick_rolling[c] = df_perc_period[ticker].rolling(corr_period).corr(df_perc_period[c], method='spearman').dropna()
+                corr_tick_rolling[c] = rolling_spearman(df_perc_period[ticker].values, df_perc_period[c].values, corr_period)
     
-    out = pd.DataFrame(corr_tick_rolling)
+    out = pd.DataFrame(corr_tick_rolling, index=df_perc_period.index).dropna()
     out = out.reset_index()
     out_long = pd.melt(out, id_vars='Date', value_vars=out.columns[1:])
     out_long = out_long.rename(columns={"variable": "Ticker", "value": "Correlation"})
