@@ -3,7 +3,7 @@ import streamlit as st
 
 
 
-@st.cache(show_spinner=False)
+#@st.cache(show_spinner=False)
 def get_data(tickers=None, 
              period="1y", 
              interval="1d",
