@@ -114,10 +114,10 @@ def run_page1():
         fig_width = expander_figureOpt.slider("Figure width", min_value=100, max_value=2000, value=1150, step=1)
         fig_height = expander_figureOpt.slider("Figure height", min_value=100, max_value=2000, value=950, step=1)
         font_size = expander_figureOpt.number_input("Font size", min_value=4, max_value=30, value=9, step=1)
-        color_cyc = expander_figureOpt.color_picker('Color for cyclical', value='#CC241D')
-        color_def = expander_figureOpt.color_picker('Color for defensive', value='#458588')
-        color_gro = expander_figureOpt.color_picker('Color for growth', value='#689D6A')
-        color_oth = expander_figureOpt.color_picker('Color for other', value='#928374')
+        color_cyc = expander_figureOpt.beta_color_picker('Color for cyclical', value='#CC241D')
+        color_def = expander_figureOpt.beta_color_picker('Color for defensive', value='#458588')
+        color_gro = expander_figureOpt.beta_color_picker('Color for growth', value='#689D6A')
+        color_oth = expander_figureOpt.beta_color_picker('Color for other', value='#928374')
         color_discrete_map={
                     "Cyclical":color_cyc,
                     "Defensive":color_def,
