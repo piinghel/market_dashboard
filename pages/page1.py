@@ -79,7 +79,7 @@ def run_page1():
     if st.sidebar.button("Update tickers"):
         tickers = pd.read_excel('data/tickers.xlsx')
 
-    comput = st.sidebar.selectbox("Choose computation",["Close", "High", "Low", "Open", "Volume"])
+    comput = st.sidebar.selectbox("Choose computation", ["Close", "High", "Low", "Open", "Volume"])
 
     # convert to string
     tickers_input = ' '.join(map(str, tickers['Ticker'].values.tolist()))
