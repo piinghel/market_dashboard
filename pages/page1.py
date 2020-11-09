@@ -7,20 +7,30 @@ import plotly.express as px
 import datetime
 import time
 
+
 # own functions
 from functions.get_data import get_data
 from functions.get_data import compute_returns
 
+
 # Global variables 
-DIR_TICKERS = 'data/tickers.txt'
-MAX_PERIOD = 20 * 365
-TODAY = datetime.datetime.now()
-BEGIN_DATE_THIS_YEAR = datetime.datetime(TODAY.year, 1, 1)
-DAYS_YTD = (TODAY - BEGIN_DATE_THIS_YEAR).days
+def load_global_vars():
+    global DIR_TICKERS
+    global MAX_PERIOD
+    global TODAY
+    global BEGIN_DATE_THIS_YEAR
+    global DAYS_YTD
+    
+    DIR_TICKERS = 'data/tickers.xlsx'
+    MAX_PERIOD = 20 * 365
+    TODAY = datetime.datetime.now()
+    BEGIN_DATE_THIS_YEAR = datetime.datetime(TODAY.year, 1, 1)
+    DAYS_YTD = (TODAY - BEGIN_DATE_THIS_YEAR).days
+
 
 @st.cache(allow_output_mutation=True, show_spinner=False)
-def get_tickers(dir=DIR_TICKERS):
-    df = pd.read_excel('data/tickers.xlsx')
+def get_tickers(dir='data/tickers.xlsx', time=None):
+    df = pd.read_excel(dir)
     # df.to_excel('data/tickers.xlsx', sheet_name='sheet1', index=False)
     return df
 
@@ -64,6 +74,9 @@ def make_figure(data, periods, color_discrete_map, fig_width=1000, fig_height=10
     return fig
 
 def run_page1():
+
+    # load global variables
+    load_global_vars()
    
     st.title('Market dashboard')
 
@@ -72,7 +85,7 @@ def run_page1():
     st.write("Last updated at", dt_string)
     # import tickers
     # with st.spinner("Updating tickers..."):
-    tickers = get_tickers(dir=DIR_TICKERS)
+    tickers = get_tickers(dir=DIR_TICKERS, time=dt_string)
 
 
     st.sidebar.title("User settings")
@@ -132,7 +145,7 @@ def run_page1():
 
     # compute returns
     #with st.spinner("Loading data..."):
-    data = get_data(tickers=tickers_input, period="20y")
+    data = get_data(tickers=tickers_input, period="20y", time=dt_string)
         
 
     rets = [compute_returns(data=data, column=comput, period=p, benchmark=benchmark) for p in periods]

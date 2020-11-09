@@ -11,7 +11,8 @@ def get_data(tickers=None,
              auto_adjust=True,
              prepost=True,
              threads=True,
-             proxy=None):
+             proxy=None,
+             time=None):
         
     data = yf.download(
     # tickers list or string as well
