@@ -4,7 +4,26 @@ import plotly.express as px
 from numpy.lib.stride_tricks import as_strided
 from numpy.lib import pad
 import numpy as np
+import datetime
+import time
+
+# own module
 from functions.get_data import get_data
+
+
+# Global variables 
+def load_global_vars():
+    global DIR_TICKERS
+    global MAX_PERIOD
+    global TODAY
+    global BEGIN_DATE_THIS_YEAR
+    global DAYS_YTD
+    
+    DIR_TICKERS = 'data/tickers.xlsx'
+    MAX_PERIOD = 20 * 365
+    TODAY = datetime.datetime.now()
+    BEGIN_DATE_THIS_YEAR = datetime.datetime(TODAY.year, 1, 1)
+    DAYS_YTD = (TODAY - BEGIN_DATE_THIS_YEAR).days
 
 
 def rolling_spearman(seqa, seqb, window):
@@ -24,9 +43,15 @@ def rolling_spearman(seqa, seqb, window):
     return pad(corrs, (window - 1, 0), 'constant', constant_values=np.nan)
 
 def run_page2():
-    
+
+    load_global_vars()
     st.sidebar.title("User settings")
-    st.header("Correlation overview")
+    st.title("Correlation overview")
+
+    # dd/mm/YY H:M:S
+    dt_string = TODAY.strftime("%d/%m/%Y %H:%M:%S")
+    st.write("Last updated at", dt_string)
+
     ex_tickers = "CL=F, DX=F, GC=F, ES=F, NQ=F"
     tickers = st.text_input("Provide ticker symbols, split by comma", ex_tickers)
     df = get_data(tickers=tickers, period="20y")
