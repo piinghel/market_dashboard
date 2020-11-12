@@ -40,7 +40,9 @@ def rolling_spearman(seqa, seqb, window):
     ar = ar.rank(1)
     br = br.rank(1)
     corrs = ar.corrwith(br, 1)
+    
     return pad(corrs, (window - 1, 0), 'constant', constant_values=np.nan)
+
 
 def run_page2():
 
@@ -52,7 +54,7 @@ def run_page2():
     dt_string = TODAY.strftime("%d/%m/%Y %H:%M:%S")
     st.write("Last updated at", dt_string)
 
-    ex_tickers = "CL=F, DX=F, GC=F, ES=F, NQ=F"
+    ex_tickers = "CL=F, DX=F, GC=F, ES=F, NQ=F, DBC"
     tickers = st.text_input("Provide ticker symbols, split by comma", ex_tickers)
     df = get_data(tickers=tickers, period="20y")
     df_perc = df["Close"].pct_change(periods=1).dropna()
@@ -61,6 +63,7 @@ def run_page2():
     ex_periods = "10, 20, 30, 60, 90, 120, 150, 180, 210"
     periods = st.text_input("Choose correlation periods, split by comma", ex_periods)
     periods = periods.split(",")
+    
     # convert to integer
     periods = [int(p) for p in periods]
     
@@ -77,7 +80,6 @@ def run_page2():
     # precision
     precision = st.sidebar.number_input("Number of digits for precision", min_value=1, max_value=10, value=3)
     st.dataframe(pd.DataFrame(store_corelations).T.style.set_precision(precision))
-
     
     # correlation for figure
     corr_period = st.sidebar.slider("Choose correlation period figure", min_value=5, max_value=200, value=30)
@@ -87,6 +89,7 @@ def run_page2():
         if c !=ticker:
                 df_perc_period = df_perc.tail(period_figure)
                 corr_tick_rolling[c] = rolling_spearman(df_perc_period[ticker].values, df_perc_period[c].values, corr_period)
+    
     
     # plot fiure
     out = pd.DataFrame(corr_tick_rolling, index=df_perc_period.index).dropna().reset_index()

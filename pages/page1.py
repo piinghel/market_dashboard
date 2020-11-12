@@ -20,7 +20,7 @@ def load_global_vars():
     global TODAY
     global BEGIN_DATE_THIS_YEAR
     global DAYS_YTD
-    
+
     DIR_TICKERS = 'data/tickers.xlsx'
     MAX_PERIOD = 20 * 365
     TODAY = datetime.datetime.now()
@@ -34,27 +34,30 @@ def get_tickers(dir='data/tickers.xlsx', time=None):
     # df.to_excel('data/tickers.xlsx', sheet_name='sheet1', index=False)
     return df
 
+
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def make_figure(data, periods, color_discrete_map, fig_width=1000, fig_height=1000, font_size=10, 
                 sorting=1, asc_desc="total ascending", within_group=False):
   
 
-    fig = px.bar(data, x="Return (%)", y="Ticker", facet_col="Period", color="Group", 
-                 facet_col_spacing=.025, width=fig_width, height=fig_height, 
-                 hover_data=["Ticker","Name","Return (%)","Group", "Period"], 
-                 color_discrete_map=color_discrete_map)
+    fig = px.bar(
+        data, x="Return (%)", 
+        y="Ticker", 
+        facet_col="Period", color="Group", 
+        facet_col_spacing=.025, 
+        width=fig_width, 
+        height=fig_height, 
+        hover_data=["Ticker","Name","Return (%)","Group", "Period"], 
+        color_discrete_map=color_discrete_map
+        )
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', font=dict(
             size=font_size
         ))
     
     fig.layout.xaxis.update(matches=None)
-
     fig.layout.xaxis2.update(matches=None)
-
     fig.layout.xaxis3.update(matches=None)
-
     fig.layout.xaxis4.update(matches=None)
-
     fig.layout.xaxis5.update(matches=None)
 
     #return fig
@@ -72,6 +75,7 @@ def make_figure(data, periods, color_discrete_map, fig_width=1000, fig_height=10
 
 
     return fig
+
 
 def run_page1():
 
@@ -159,17 +163,27 @@ def run_page1():
     with expander_ticker:
         t = expander_ticker.multiselect("Select tickers", options=tickers_list, default=tickers_list)
 
+    
     select_tick = rets_conc[rets_conc['Ticker'].isin(t)]
-
     select_tick = pd.concat([select_tick.set_index('Ticker'), tickers.set_index('Ticker')], axis=1, join='inner').reset_index()
     select_tick = select_tick.sort_values(['Group',sorts], ascending=ascending)
     select_tick.dropna(inplace=True)
     df_plot_long = pd.melt(select_tick, id_vars=['Ticker','Name', 'Group'], var_name='Period', value_name='Return (%)')
-    # make figure
+    
+    
     #with st.spinner("Updating figure..."):
-    fig = make_figure(data=df_plot_long, fig_width=fig_width, fig_height=fig_height, 
-                    font_size=font_size, sorting = sorts, periods=periods,
-                    asc_desc=asc_desc, within_group=within_group, color_discrete_map = color_discrete_map)
+    fig = make_figure(
+        data=df_plot_long, 
+        fig_width=fig_width, 
+        fig_height=fig_height, 
+        font_size=font_size, 
+        sorting=sorts, 
+        periods=periods,
+        asc_desc=asc_desc, 
+        within_group=within_group, 
+        color_discrete_map=color_discrete_map
+                      )
+    # show figure
     st.plotly_chart(fig, use_container_width=False)
     
     
