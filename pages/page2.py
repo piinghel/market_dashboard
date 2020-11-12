@@ -61,7 +61,7 @@ def run_page2():
     ticker = st.sidebar.selectbox("Select ticker", list(df_perc.columns))
 
     ex_periods = "10, 20, 30, 60, 90, 120, 150, 180, 210"
-    periods = st.text_input("Choose correlation periods, split by comma", ex_periods)
+    periods = st.text_input("Choose correlation periods, split by comma (expressed in days)", ex_periods)
     periods = periods.split(",")
     
     # convert to integer
@@ -83,7 +83,7 @@ def run_page2():
     
     # correlation for figure
     corr_period = st.sidebar.slider("Choose correlation period figure", min_value=5, max_value=200, value=30)
-    period_figure = st.sidebar.slider("Choose maximum period figure", min_value=100, max_value=2000, value=1000)
+    period_figure = st.sidebar.slider("Choose maximum period figure (expressed in days)", min_value=100, max_value=2000, value=1000)
     corr_tick_rolling = {}
     for c in df_perc.columns:
         if c !=ticker:
