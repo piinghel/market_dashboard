@@ -6,6 +6,7 @@ from numpy.lib import pad
 import numpy as np
 import datetime
 import time
+import pytz
 
 # own module
 from functions.get_data import get_data
@@ -21,7 +22,8 @@ def load_global_vars():
     
     DIR_TICKERS = 'data/tickers.xlsx'
     MAX_PERIOD = 20 * 365
-    TODAY = datetime.datetime.now()
+    TIMEZONE = pytz.timezone('Europe/Brussels')
+    TODAY = datetime.datetime.now(tz=TIMEZONE).replace(tzinfo=None)
     BEGIN_DATE_THIS_YEAR = datetime.datetime(TODAY.year, 1, 1)
     DAYS_YTD = (TODAY - BEGIN_DATE_THIS_YEAR).days
 
