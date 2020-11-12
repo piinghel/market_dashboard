@@ -82,7 +82,7 @@ def run_page2():
     st.dataframe(pd.DataFrame(store_corelations).T.style.set_precision(precision))
     
     # correlation for figure
-    corr_period = st.sidebar.slider("Choose correlation period figure", min_value=5, max_value=200, value=30)
+    corr_period = st.sidebar.slider("Choose correlation period figure (expressed in days)", min_value=5, max_value=200, value=30)
     period_figure = st.sidebar.slider("Choose maximum period figure (expressed in days)", min_value=100, max_value=2000, value=1000)
     corr_tick_rolling = {}
     for c in df_perc.columns:
